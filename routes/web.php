@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HelloController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,18 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get("/cats" ,[CategoryController::class , "index"]);
 
-Route::get("/xxx/{name}" , [HelloController::class ,"hello"]);
-
-// Route::get("/add/{x}/{y}/{z}" , function ($n1 ,$n2 ,$n3){
-//     echo  "$n1 + $n2 +$n3 = " , ($n1+$n2 +$n3);
-// });
-
-Route::get("/add/{x}/{y}/{z}" , function (Request $request){
-   echo  $request->x ," + " ,$request->y ," + " ,$request->z ," = " , ( $request->x +  $request->y + $request->z);
-});
+// Route::get("/cats" , function (){
+//     return view("cats");
+//   });
 
 
-Route::get("/hi/{name?}" , function($name=null){
-    echo "Hi $name";
-});
