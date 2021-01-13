@@ -26,4 +26,13 @@ class CategoryController extends Controller
         // dd(compact("name"));
 
     }
+
+    function store(Request $request){
+        // dd($request->all());
+        echo $request->name;
+        echo $request->comment;
+        echo $request->input("name");
+    }
+
+
 }

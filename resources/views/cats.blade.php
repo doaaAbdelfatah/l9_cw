@@ -15,14 +15,18 @@
         <div class="row">
         <h1>Category</h1>
         <div class="col-4">
-            <form>
+            <form action="/cats/add" method="post">
+                @csrf
                 <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="name"  class="form-control" placeholder="" aria-describedby="helpId">
-                <small id="helpId" class="text-muted">Help text</small>
+                </div>
+                <div class="form-group">
+                <label>Comment</label>
+                <input type="text" name="comment"  class="form-control" placeholder="" aria-describedby="helpId">
                 </div>
 
-                <input type="submit" class="btn btn-primary" value="Add">
+                <input type="submit" class="btn btn-primary mt-2" value="Add">
             </form>
 
         </div>
