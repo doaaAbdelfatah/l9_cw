@@ -1,33 +1,21 @@
 <?php
-
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get("/cats" ,[CategoryController::class , "index"]);
+Route::get("/cats" ,[CategoryController::class , "index"])->name("cats.index");
 Route::post("/cats/add" ,[CategoryController::class , "store"]);
-
+Route::get("/cats/show" ,[CategoryController::class , "show"]);
 
 Route::get("/welcome/{name}" , function ($name){
     return "Welcome $name";
-  })->where("name" ,"[A-Z]{1}[a-z ]+");
-
+})->where("name" ,"[A-Z]{1}[a-z ]+");
 
 Route::view('/hi', 'hello' ,["name" =>"ahmed"]);
 
@@ -36,8 +24,6 @@ Route::get('/add/{x}/{y}', function (Request $request) {
         $n2 = $request->y;
         echo "$n1 + $n2 = " , ($n1 +$n2);
        dd( $request->routeIs("add.*"));
-
-
 })->name("add.index");
 
 Route::prefix("/product")->group(function(){

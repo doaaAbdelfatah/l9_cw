@@ -15,20 +15,47 @@
         <div class="row">
         <h1>Category</h1>
         <div class="col-4">
+            {{-- @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif --}}
             <form action="/cats/add" method="post">
                 @csrf
                 <div class="form-group">
                 <label>Name</label>
-                <input type="text" name="name"  class="form-control" placeholder="" aria-describedby="helpId">
+                <input type="text" name="name"  class="form-control" placeholder="" value="{{old('name')}}" aria-describedby="helpId">
+                @error('name')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                </div>
+                <div class="form-group">
+                <label>Age</label>
+                <input type="text" name="age"  class="form-control" placeholder="" value="{{old('age')}}" aria-describedby="helpId">
+                @error('age')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                </div>
+                <div class="form-group">
+                <label>Hire Date</label>
+                <input type="date" name="hdate"  class="form-control" placeholder="" value="{{old('hdate')}}" aria-describedby="helpId">
+                @error('hdate')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 </div>
                 <div class="form-group">
                 <label>Comment</label>
-                <input type="text" name="comment"  class="form-control" placeholder="" aria-describedby="helpId">
+                <input type="text" name="comment"  value="{{old('comment')}}"  class="form-control" placeholder="" aria-describedby="helpId">
+                @error('comment')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-
                 <input type="submit" class="btn btn-primary mt-2" value="Add">
             </form>
-
         </div>
         <div class="col-8">
             @forelse ($categories as $k=> $cat)
@@ -44,11 +71,7 @@
             @empty
             no cats
             @endforelse
-
-
         </div>
-
-
     </div>
     <hr>
     <div>
