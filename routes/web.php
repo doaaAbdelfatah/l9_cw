@@ -1,7 +1,11 @@
 <?php
+
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 
@@ -43,4 +47,21 @@ Route::prefix("/product")->group(function(){
 Route::get('/search/{key}', function ($key) {
     return $key;
 })->where('key', '.*');
+
+
+
+// Route::get("/brands" ,function(){
+//     // dd(Brand::all());
+// //    dd( DB::table('brands')->get());
+// });
+
+
+Route::prefix("/brands" )->group(function(){
+    Route::get("/" , [BrandController::class , "index"])->name("brands.index");
+    Route::post("/" , [BrandController::class , "store"]);
+    Route::get("/delete/{id}" , [BrandController::class , "destroy"]);
+});
+
+
+
 
