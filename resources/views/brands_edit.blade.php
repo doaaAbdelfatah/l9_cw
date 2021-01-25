@@ -66,8 +66,29 @@
                         </div>
                     </form>
               </div>
+          </div>
+          <div class="row mt-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($brand->products as $product)
+                    <tr>
+                        <td>{{$product->id}}</td>
+                        <td>{{$product->name}}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="2">No Products Yet</td>
+                    </tr>
+                    @endforelse
 
-
+                </tbody>
+            </table>
           </div>
       </div>
   </body>

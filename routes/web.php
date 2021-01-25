@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProductController;
 use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -31,19 +32,19 @@ Route::get('/add/{x}/{y}', function (Request $request) {
        dd( $request->routeIs("add.*"));
 })->name("add.index");
 
-Route::prefix("/product")->group(function(){
-    Route::get("/" ,[ProductController::class , "index"])->name("product.index");
-    Route::get("/add" ,[ProductController::class , "create"]);
-    Route::post("/add" ,[ProductController::class , "store"]);
-    Route::get("/edit/{id}" ,[ProductController::class , "edit"]);
-    Route::post("/edit/{id}" ,[ProductController::class , "update"]);
-    Route::post("/delete/{id}" ,[ProductController::class , "destroy"]);
-    // Route::get("/{id}/order/{order}" ,[ProductController::class , "show"])
-    //     ->where("id" , "[0-9]{1}")
-    //     ->where("order" , "[0-9]{2}");
-     Route::get("/{id}/order/{order}" ,[ProductController::class , "show"])
-        ->where(["id" => "[0-9]{1}" , "order" => "[0-9]{2}"]);
-});
+// Route::prefix("/product")->group(function(){
+//     Route::get("/" ,[ProductController::class , "index"])->name("product.index");
+//     Route::get("/add" ,[ProductController::class , "create"]);
+//     Route::post("/add" ,[ProductController::class , "store"]);
+//     Route::get("/edit/{id}" ,[ProductController::class , "edit"]);
+//     Route::post("/edit/{id}" ,[ProductController::class , "update"]);
+//     Route::post("/delete/{id}" ,[ProductController::class , "destroy"]);
+//     // Route::get("/{id}/order/{order}" ,[ProductController::class , "show"])
+//     //     ->where("id" , "[0-9]{1}")
+//     //     ->where("order" , "[0-9]{2}");
+//      Route::get("/{id}/order/{order}" ,[ProductController::class , "show"])
+//         ->where(["id" => "[0-9]{1}" , "order" => "[0-9]{2}"]);
+// });
 
 Route::get('/search/{key}', function ($key) {
     return $key;
@@ -70,3 +71,11 @@ Route::prefix("/depts")->group(function(){
     Route::get('/', [DepartmentController::class ,"index"])->name("depts.index");
 });
 
+
+Route::prefix("/products" )->group(function(){
+    Route::get("/" , [ProductController::class , "index"])->name("products.index");
+    Route::post("/" , [ProductController::class , "store"]);
+    Route::get("/{id}/delete" , [ProductController::class , "destroy"]);
+    Route::get("/{id}/edit" , [ProductController::class , "edit"]);
+    Route::post("/{id}" , [ProductController::class , "update"]);
+});

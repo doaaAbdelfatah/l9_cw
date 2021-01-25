@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return "index";
+        $prods = Product::all();
+        $cats = Category::all();
+        return view("products.index" ,["products" =>$prods , "categories" =>$cats]);
     }
 
     /**
@@ -23,12 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        // return "create";
-        // return redirect("/product");
-        //  return redirect()->to("/product");
-        // return redirect()->action([ProductController::class, "index"]);
-        // return redirect()->back();
-        return redirect()->route("product.index"); // route name
+
     }
 
     /**
@@ -39,7 +38,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        return "store";
+        $request->validate([
+            "name" =>"required",
+            "price"=>"required|numeric",
+            "category_id" => "required",
+        ]);
+
+        $p = new Product();
+        $p->name = $request->name;
+        $p->price = $request->price;
+        $p->category_id = $request->category_id;
+        $p->brand_id = $request->brand_id;
+        $p->save();
+
+        return redirect()->route("products.index");
+
+
     }
 
     /**
@@ -50,7 +64,7 @@ class ProductController extends Controller
      */
     public function show($id ,$order)
     {
-        return "show $id Order $order";
+
     }
 
     /**
@@ -61,7 +75,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return "update";
+
     }
 
     /**
@@ -73,7 +87,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return "updated";
+
     }
 
     /**
@@ -84,6 +98,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        return "delete";
+
     }
 }
