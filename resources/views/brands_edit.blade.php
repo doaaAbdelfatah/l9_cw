@@ -49,13 +49,13 @@
       </nav>
       <div class="container">
           <div class="row mt-3">
-              <h1>Brands</h1>
+              <h1>Edit Brand {{$brand->name}}</h1>
               <div class="col-md-3">
-                    <form action="/brands" method="POST">
+                    <form action="/brands/{{$brand->id}}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="">Name</label>
-                            <input type="text" name="name" id="" class="form-control" placeholder="Brand Name" aria-describedby="helpId">
+                            <input type="text" name="name" id="" value="{{$brand->name}}" class="form-control" placeholder="Brand Name" aria-describedby="helpId">
                             @error('name')
                                 <small  class="text-danger">{{$message}}</small>
                             @enderror
@@ -66,41 +66,7 @@
                         </div>
                     </form>
               </div>
-            <div class="col-md-9">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>name</th>
-                            <th>Updated At</th>
-                            <th>Created At</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       @forelse ($xx as $brand)
-                        <tr>
-                            <td>{{$brand->id}}</td>
-                            <td>{{$brand->name}}</td>
-                            <td>{{$brand->updated_at}}</td>
-                            <td>{{$brand->created_at}}</td>
-                            <td>
-                                <a class="btn btn-sm btn-success" href="/brands/{{$brand->id}}/edit" role="button">Edit</a>
-                                <a class="btn btn-sm btn-danger" href="/brands/{{$brand->id}}/delete" role="button">Delete</a>
-                            </td>
-                        </tr>
-                       @empty
-                        <tr>
-                            <td colspan="5">
-                                Empty  Result
-                            </td>
-                        </tr>
-                       @endforelse
 
-
-                    </tbody>
-                </table>
-            </div>
 
           </div>
       </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProductController;
 use App\Models\Brand;
 use Illuminate\Http\Request;
@@ -59,9 +60,13 @@ Route::get('/search/{key}', function ($key) {
 Route::prefix("/brands" )->group(function(){
     Route::get("/" , [BrandController::class , "index"])->name("brands.index");
     Route::post("/" , [BrandController::class , "store"]);
-    Route::get("/delete/{id}" , [BrandController::class , "destroy"]);
+    Route::get("/{id}/delete" , [BrandController::class , "destroy"]);
+    Route::get("/{id}/edit" , [BrandController::class , "edit"]);
+    Route::post("/{id}" , [BrandController::class , "update"]);
 });
 
 
-
+Route::prefix("/depts")->group(function(){
+    Route::get('/', [DepartmentController::class ,"index"])->name("depts.index");
+});
 
