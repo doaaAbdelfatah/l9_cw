@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Employee;
 use App\Models\Mechanic;
 use Illuminate\Database\Seeder;
 
@@ -22,6 +24,10 @@ class DatabaseSeeder extends Seeder
             OwnerSeeder::class,
             CarSeeder::class,
             MechanicSeeder::class,
+            EmployeeSeeder::class,
         ]);
+
+        Category::factory(15)->create();
+        Employee::factory(1000)->create();
     }
 }

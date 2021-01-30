@@ -32,30 +32,11 @@ Route::get('/add/{x}/{y}', function (Request $request) {
        dd( $request->routeIs("add.*"));
 })->name("add.index");
 
-// Route::prefix("/product")->group(function(){
-//     Route::get("/" ,[ProductController::class , "index"])->name("product.index");
-//     Route::get("/add" ,[ProductController::class , "create"]);
-//     Route::post("/add" ,[ProductController::class , "store"]);
-//     Route::get("/edit/{id}" ,[ProductController::class , "edit"]);
-//     Route::post("/edit/{id}" ,[ProductController::class , "update"]);
-//     Route::post("/delete/{id}" ,[ProductController::class , "destroy"]);
-//     // Route::get("/{id}/order/{order}" ,[ProductController::class , "show"])
-//     //     ->where("id" , "[0-9]{1}")
-//     //     ->where("order" , "[0-9]{2}");
-//      Route::get("/{id}/order/{order}" ,[ProductController::class , "show"])
-//         ->where(["id" => "[0-9]{1}" , "order" => "[0-9]{2}"]);
-// });
 
 Route::get('/search/{key}', function ($key) {
     return $key;
 })->where('key', '.*');
 
-
-
-// Route::get("/brands" ,function(){
-//     // dd(Brand::all());
-// //    dd( DB::table('brands')->get());
-// });
 
 
 Route::prefix("/brands" )->group(function(){

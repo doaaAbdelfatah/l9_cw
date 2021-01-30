@@ -12,4 +12,11 @@ class Company extends Model
     function manager(){
         return $this->hasOne(Manager::class ,"id" ,"id");
     }
+
+    function depts(){
+        return $this->hasMany(Department::class);
+    }
+    function emps(){
+        return $this->hasManyThrough(Employee::class ,Department::class);
+    }
 }
