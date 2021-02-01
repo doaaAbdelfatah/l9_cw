@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="{{__('messages.dir')}}">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>{{trans("messages.welcome")}}</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -49,20 +49,20 @@
       </nav>
       <div class="container">
           <div class="row mt-3">
-              <h1>Products</h1>
+              <h1>{{trans_choice("messages.Product" , \App\Models\Product::count()  )}}</h1>
               <div class="col-md-3">
                     <form action="/products" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="">Name</label>
-                            <input type="text" name="name" id="" class="form-control" placeholder="Name" aria-describedby="helpId">
+                            <label for="">{{__("messages.name")}}</label>
+                            <input type="text" name="name" id="" class="form-control" placeholder="{{__("messages.name")}}" aria-describedby="helpId">
                             @error('name')
                                 <small  class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Price</label>
-                            <input type="number" name="price" id="" class="form-control" placeholder="Price" aria-describedby="helpId">
+                            <label for="">{{__('messages.price')}}</label>
+                            <input type="number" name="price" id="" class="form-control" placeholder="{{__('messages.price')}}" aria-describedby="helpId">
                             @error('price')
                                 <small  class="text-danger">{{$message}}</small>
                             @enderror
@@ -104,8 +104,8 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>name</th>
+                            <th>{{__("messages.id")}}</th>
+                            <th>{{__("messages.name")}}</th>
                             <th>price</th>
                             <th>Brand</th>
                             <th>Category</th>

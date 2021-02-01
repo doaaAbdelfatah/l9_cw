@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Middleware\TestMiddleware;
 use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -53,10 +54,44 @@ Route::prefix("/depts")->group(function(){
 });
 
 
-Route::prefix("/products" )->group(function(){
+Route::prefix("/products" )->middleware([TestMiddleware::class ])->group(function(){
     Route::get("/" , [ProductController::class , "index"])->name("products.index");
     Route::post("/" , [ProductController::class , "store"]);
     Route::get("/{id}/delete" , [ProductController::class , "destroy"]);
     Route::get("/{id}/edit" , [ProductController::class , "edit"]);
     Route::post("/{id}" , [ProductController::class , "update"]);
 });
+
+
+Route::get('/test', function () {
+    echo "<br>Hi from controller function<br>";
+})->middleware(TestMiddleware::class);
+
+
+Route::get('users/{user_age}', function ($user_age) {
+
+    echo "Hello you are $user_age years old";
+
+})->middleware("age");
+
+
+Route::get('/change_lang/{lang}', function ($lang) {
+    // dd(app()->getLocale());
+
+    // app()->setLocale($lang);
+    // echo(app()->getLocale());
+    // echo (trans('messages.welcome'));
+
+    session()->put("lang" ,$lang);
+    return redirect()->back();
+});
+
+
+
+Route::get('/test_temp' , function(){
+return view("test");
+});
+Route::get('/test2_temp' , function(){
+return view("test2");
+});
+

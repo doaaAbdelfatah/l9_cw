@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\TestMiddleware;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,12 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware(TestMiddleware::class);
+    }
+
     public function index()
     {
         $x = Brand::all();
